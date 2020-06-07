@@ -7,19 +7,15 @@ package modelo;
 
 import java.io.Serializable;
 import java.time.Year;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -35,6 +31,7 @@ public class Equipo implements Serializable {
     @Id
     @Column(name = "id")
     @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Short id;
 
     @Column(name = "nombre")
@@ -64,7 +61,7 @@ public class Equipo implements Serializable {
     @Column(name = "estadio")
     private String estadio;
 
-    @OneToMany(mappedBy = "id_equipo", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "equipo", cascade = CascadeType.ALL)
     private List<Entrenador> listaEntrenador;
 
     public Equipo() {

@@ -6,18 +6,10 @@
 package vista;
 
 import controlador.LigaFutbol;
-import java.util.Date;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Year;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
 import java.util.Scanner;
 import modelo.Entrenador;
 import modelo.Equipo;
@@ -161,7 +153,7 @@ public class Main {
         entrenador.setNombre(nombre);
         entrenador.setApellido1(apellido1);
         entrenador.setApellido2(apellido2);
-        entrenador.setId_equipo(datosEquipo());
+        entrenador.setEquipo(datosEquipo());
         
         return entrenador;
     }

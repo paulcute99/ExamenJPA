@@ -6,20 +6,17 @@
 package modelo;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -33,6 +30,7 @@ public class Entrenador implements Serializable {
     @Id
     @Column(name = "cod_entrenador")
     @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Short cod_entrenador;
 
     @Column(name = "nombre")
@@ -57,9 +55,7 @@ public class Entrenador implements Serializable {
     @JoinColumn(name = "id_equipo", referencedColumnName = "id")
     @NotNull
     @ManyToOne(cascade = CascadeType.PERSIST)
-    private Equipo id_equipo;
-
-    
+    private Equipo equipo;
 
     public Entrenador() {
 
@@ -119,10 +115,9 @@ public class Entrenador implements Serializable {
      *
      * @return id del equipo
      */
-    public Equipo getId_equipo() {
-        return id_equipo;
+    public Equipo getEquipo() {
+        return equipo;
     }
-
 
     /**
      * Establece la id del entrenador
@@ -172,30 +167,28 @@ public class Entrenador implements Serializable {
     /**
      * Establece la id del equipo
      *
-     * @param id_equipo
+     * @param equipo
      */
-    public void setId_equipo(Equipo id_equipo) {
-        this.id_equipo = id_equipo;
+    public void setEquipo(Equipo equipo) {
+        this.equipo = equipo;
     }
-    
+
     @Override
     public String toString() {
-        return "Entrenador : " + "Id del entrenador:" + cod_entrenador + ", nombre: " + nombre +
-                ", primer apellido: " + apellido1 + ", segundo apellido: " + apellido2 + ", id_equipo: " + id_equipo;
+        return "Entrenador : " + "Id del entrenador:" + cod_entrenador + ", nombre: " + nombre
+                + ", primer apellido: " + apellido1 + ", segundo apellido: " + apellido2 + ", equipo: " + equipo;
     }
-    
-     @Override
+
+    @Override
     public boolean equals(Object object) {
-         if (!(object instanceof Entrenador)) {
+        if (!(object instanceof Entrenador)) {
             return false;
         }
         Entrenador other = (Entrenador) object;
-        if ((this.cod_entrenador== null && other.cod_entrenador != null) || (this.cod_entrenador != null && !this.cod_entrenador.equals(other.cod_entrenador))) {
+        if ((this.cod_entrenador == null && other.cod_entrenador != null) || (this.cod_entrenador != null && !this.cod_entrenador.equals(other.cod_entrenador))) {
             return false;
         }
         return true;
     }
-    
-    
 
 }
